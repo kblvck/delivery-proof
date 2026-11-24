@@ -1,3 +1,4 @@
+import { HttpsProxyAgent } from "https-proxy-agent";
 import react from "@vitejs/plugin-react";
 import { defineConfig, loadEnv } from "vite";
 
@@ -8,8 +9,10 @@ import { defineConfig, loadEnv } from "vite";
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, ".", "");
   const target = env.QORE_REST_PROXY_TARGET || "https://api-testnet.qore.host";
+  const proxyUrl = env.QORE_HTTPS_PROXY;
+  const agent = proxyUrl ? new HttpsProxyAgent(proxyUrl) : undefined;
   const proxy = {
-    "/lcd": { target, changeOrigin: true, rewrite: (p: string) => p.replace(/^\/lcd/, "") },
+    "/lcd": { target, agent, changeOrigin: true, rewrite: (p: string) => p.replace(/^\/lcd/, "") },
   };
   return {
     plugins: [react()],

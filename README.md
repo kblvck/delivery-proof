@@ -6,6 +6,8 @@ A Quantum Pass entry built from QoreChain's official `create-qorechain-dapp@0.14
 
 Install Node.js 20 or later, then run `npm ci` and `npm run dev`. Open the localhost URL Vite prints. For a production build, run `npm run build`. Host behind HTTPS and forward same-origin `/lcd/*` requests to `https://api-testnet.qore.host/*` with the prefix stripped. Vite development and preview already supply this proxy.
 
+If your development environment requires an outbound HTTPS proxy, set `QORE_HTTPS_PROXY` to your proxy URL before starting Vite.
+
 ## Record and verify a receipt
 
 1. Open the app in a browser with QoreX. Select Diana and fund a fresh testnet address with test QOR from the [official event guide](https://build.qorechain.io/start).
